@@ -34,8 +34,11 @@ const sess = {
 app.use(session(sess));
 
 // Define template engine
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine('hbs', hbs.engine({
+  dafaultLayout: 'main',
+  extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
