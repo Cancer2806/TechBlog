@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // Create Blogs model (table) using Sequelize
-class Blogs extends Model { }
+class Blogs extends Model {}
 
 // Define Blog fields
 Blogs.init(
@@ -39,4 +39,4 @@ Blogs.init(
   }
 );
 
-model.exports = Blogs;
+module.exports = Blogs;

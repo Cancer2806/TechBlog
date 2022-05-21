@@ -22,6 +22,6 @@
     "sequelize": "^6.19.2"
   },
   "devDependencies": {
-    "faker": "^5.5.3"
+    "@faker-js/faker": "^6.3.1"
   }
 }

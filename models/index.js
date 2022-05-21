@@ -4,7 +4,7 @@ const Blogs = require("./Blogs");
 const Comments = require("./Comments");
 
 // Define relationships between tables
-Users.hasMany(Blog, {
+Users.hasMany(Blogs, {
   foreignKey: "user_id",
   onDelete: "CASCADE",
 });

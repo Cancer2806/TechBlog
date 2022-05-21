@@ -19,17 +19,20 @@ Users.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: DataTypes.email,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true,
+        isEmail: {
+          msg: "Please enter a valid email address"
+        },
       },
+    },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -37,18 +40,20 @@ Users.init(
           len: [8],
         },
       },
-    },
   },
   {
     // hooks for hashing of password on creation or updating
     hooks: {
-      beforeCreate: async (newUser) => {
-        newUser.password = await bcrypt.hash(newUser.password, 10);
-        return newUser;
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
       },
-      beforeUpdate: async (updatedUser) => {
-        updatedUser.password = await bcrypt.hash(updatedUser.password, 10);
-        return updatedUser;
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          10
+        );
+        return updatedUserData;
       },
     },
     sequelize,
