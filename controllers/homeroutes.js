@@ -27,7 +27,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/blog/:id', async (req, res) => {
+// Use withAuth middleware to prevent access to route
+router.get('/blog/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blogs.findByPk(req.params.id, {
       include: [
@@ -47,7 +48,7 @@ router.get('/blog/:id', async (req, res) => {
 
     const blog = blogData.get({ plain: true });
 
-    res.render('blog', {
+    res.render('showblog', {
       ...blog,
       logged_in: req.session.logged_in
     });
@@ -70,6 +71,36 @@ router.get('/dashboard', withAuth, async (req, res) => {
     res.render('dashboard', {
       ...user,
       logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Use withAuth middleware to prevent access to route
+router.get('/update/:id', withAuth, async (req, res) => {
+  try {
+    const blogData = await Blogs.findByPk(req.params.id, {
+      include: [
+        {
+          model: Users,
+          attributes: ['userName'],
+        },
+        {
+          model: Comments,
+          include: {
+            model: Users,
+            attributes: ['userName'],
+          },
+        },
+      ],
+    });
+
+    const blog = blogData.get({ plain: true });
+
+    res.render('updateblog', {
+      ...blog,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);

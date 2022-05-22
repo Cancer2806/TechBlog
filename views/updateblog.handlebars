@@ -1,0 +1,42 @@
+{{!-- <div class="text-center">
+  <h2>{{title}} {{id}}</h2>
+  {{!-- <p>{{{get_emoji}}}</p> --}}
+  {{!-- <p>{{contents}}</p> --}}
+
+  {{!-- <p>Created by {{user.userName}} on {{format_date created_at}}</p> --}}
+  {{!-- <p>Created by {{user.userName}} on {{format_date createdAt}}</p> --}}
+  
+<div class="row mt-4" "text-center">
+  <div class="col-md-6">
+    <h3>Update Your Blog Post</h3>
+
+    <form class="form new-project-form" data-id="{{id}}">
+      <div class="form-group">
+        <label for="project-name">Blog Title</label>
+        <input class="form-input" type="text" id="project-name" name="project-name" value="{{title}}" />
+      </div>
+      
+      <div class="form-group">
+        <label for="project-desc">Blog Entry</label>
+        <textarea class="form-input" id="project-desc" name="project-desc" >{{contents}}</textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" id="updateBtn" class="btn btn-primary" >Update</button>
+      </div>
+      <div class="">
+        <button class="btn btn-sm btn-danger" id="delete" data-id="{{id}}">DELETE</button>
+      </div>
+    </form>
+  </div>
+
+<br>
+<h4>Comments:</h4>
+{{#each comments as |comment|}}
+<p>{{comment.detail}}</p>
+<p>Comment by {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
+<br></br>
+<p>-------</p>
+{{/each}}
+</div>
+
+<script src="/js/updateblog.js"></script>

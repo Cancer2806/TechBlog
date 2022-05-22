@@ -1,6 +1,5 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
-
   const title = document.querySelector('#project-name').value.trim();
   // const contents = document.querySelector('#project-funding').value.trim();
   const contents = document.querySelector('#project-desc').value.trim();
@@ -37,6 +36,8 @@ const delButtonHandler = async (event) => {
     }
   }
 };
+
+
 
 document
   .querySelector('.new-project-form')
