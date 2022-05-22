@@ -7,10 +7,6 @@ const newFormHandler = async (event) => {
   const title = document.querySelector('#project-name').value.trim();
   const contents = document.querySelector('#project-desc').value.trim();
 
-  console.log(`title is now ${title}`);
-  console.log(`contents include ${contents}`);
-  console.log(`long shot = ${blog_id}`);
-
   if (contents) {
     const response = await fetch(`/api/blogs`, {
       method: 'PUT',
@@ -43,7 +39,26 @@ const delButtonHandler = async (event) => {
     }
   }
 };
-console.log(`am i gong super crazy?`)
+
+const delCommentHandler = async (event) => {
+  if (event.target.hasAttribute('data-id')) {
+    const comment_id = event.target.getAttribute('data-id');
+    // const blog_id = event.target.getAttribute('data-blog');
+    const blog_id = document.querySelector('.new-project-form').getAttribute('data-id');
+
+    console.log(`comment id is ${comment_id}`);
+    console.log(`blog id is ${blog_id}`);
+    const response = await fetch(`/api/comments/${comment_id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.replace(`/update/${blog_id}`);
+    } else {
+      alert('Failed to delete comment');
+}
+  }
+};
 
 document
   .querySelector('#updateBtn')
@@ -52,3 +67,7 @@ document
 document
   .querySelector('#delete')
   .addEventListener('click', delButtonHandler);
+
+document
+  .querySelector('#delcomm')
+  .addEventListener('click', delCommentHandler);

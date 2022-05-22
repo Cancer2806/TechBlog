@@ -43,7 +43,6 @@ const delButtonHandler = async (event) => {
     }
   }
 };
-console.log(`am i gong crazy?`)
 
 document
   .querySelector('.new-project-form')

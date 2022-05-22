@@ -6,7 +6,7 @@
   {{!-- <p>Created by {{user.userName}} on {{format_date created_at}}</p> --}}
   <p>Created by {{user.userName}} on {{format_date createdAt}}</p>
   
-
+{{#if logged_in}}
 <div class="row mt-4">
   <div class="col-md-6">
     {{!-- <h3>Add a Comment</h3> --}}
@@ -24,6 +24,7 @@
     </form>
   </div>
 </div>
+{{/if}}
 
 <br>
 <h3>Comments:</h3>
@@ -31,6 +32,11 @@
 <p>{{comment.detail}}</p>
 <p>Comment by {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
 {{/each}}
+
+{{#unless logged_in}}
+<p>--------------------------------------------</p>
+<h4>***  Log in to comment!  ***</h4>
+{{/unless}}
 </div>
 
 <script src="/js/showblog.js"></script>

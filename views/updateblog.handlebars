@@ -30,13 +30,18 @@
   </div>
 
 <br>
-<h4>Comments:</h4>
-{{#each comments as |comment|}}
-<p>{{comment.detail}}</p>
-<p>Comment by {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
-<br></br>
-<p>-------</p>
-{{/each}}
+<div id="delcomm">
+  <h4>Comments:</h4>
+  {{#each comments as |comment|}}
+    <div class="col-md-8">
+      <p>{{comment.detail}}</p>
+      <p>Comment by {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
+      <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
+    </div>
+    <br></br>
+    <p>-------</p>
+  {{/each}}
 </div>
+
 
 <script src="/js/updateblog.js"></script>

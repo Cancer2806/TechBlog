@@ -20,15 +20,16 @@ router.get('/', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('homepage', {
       blogs,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get('/blog/:id', withAuth, async (req, res) => {
+
+router.get('/blog/:id', async (req, res) => {
   try {
     const blogData = await Blogs.findByPk(req.params.id, {
       include: [
