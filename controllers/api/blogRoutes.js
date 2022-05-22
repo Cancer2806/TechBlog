@@ -36,3 +36,33 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 module.exports = router;
+
+// router.get('/blog/:id', async (req, res) => {
+//   console.log(`Hi, I'm here in the BlogRoutes`);
+//   try {
+//     const blogData = await Blogs.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: Users,
+//           attributes: ['userName'],
+//         },
+//         {
+//           model: Comments,
+//           include: {
+//             model: Users,
+//             attributes: ['userName'],
+//           },
+//         },
+//       ],
+//     });
+
+//     const blog = blogData.get({ plain: true });
+
+//     res.render('userblog', {
+//       ...blog,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
