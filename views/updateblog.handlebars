@@ -1,46 +1,41 @@
-{{!-- <div class="text-center">
-  <h2>{{title}} {{id}}</h2>
-  {{!-- <p>{{{get_emoji}}}</p> --}}
-  {{!-- <p>{{contents}}</p> --}}
-
-  {{!-- <p>Created by {{user.userName}} on {{format_date created_at}}</p> --}}
-  {{!-- <p>Created by {{user.userName}} on {{format_date createdAt}}</p> --}}
+{{!-- allows logged in User to update blog and review/remove comments --}}
+<div>
+  <h2 class="dash-title">Review your blog, {{user.userName}}!</h2>
+</div>
   
-<div class="row mt-4" "text-center">
+<div class="row">
   <div class="col-md-6">
-    <h3>Update Your Blog Post</h3>
-
-    <form class="form new-project-form" data-id="{{id}}">
+    <h3 class="dash-head">Update Your Blog Post</h3>
+    <form class="form new-blog-form" data-id="{{id}}">
       <div class="form-group">
-        <label for="project-name">Blog Title</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" value="{{title}}" />
-      </div>
-      
-      <div class="form-group">
-        <label for="project-desc">Blog Entry</label>
-        <textarea class="form-input" id="project-desc" name="project-desc" >{{contents}}</textarea>
+        <label for="blog-name">Blog Title</label>
+        <input class="form-input" type="text" id="blog-name" name="blog-name" value="{{title}}" />
       </div>
       <div class="form-group">
-        <button type="submit" id="updateBtn" class="btn btn-primary" >Update</button>
+        <label for="blog-desc">Blog Entry</label>
+        <textarea class="form-input" id="blog-desc" name="blog-desc" rows="10">{{contents}}</textarea>
       </div>
-      <div class="">
-        <button class="btn btn-sm btn-danger" id="delete" data-id="{{id}}">DELETE</button>
+      <div class="form-group">
+        <button type="submit" id="updateBtn" class="btn btn-primary">Update</button>
+        <button class="btn btn-sm btn-danger btn-blog" id="delete" data-id="{{id}}">DELETE</button>
       </div>
     </form>
   </div>
 
-<br>
-<div id="delcomm">
-  <h4>Comments:</h4>
-  {{#each comments as |comment|}}
-    <div class="col-md-8">
-      <p>{{comment.detail}}</p>
-      <p>Comment by {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
-      <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
+  {{#if comments.length}}
+    <div class="col-md-6">
+      <h3 class="dash-head">Review Comments</h3>
+        <div id="delcomm">
+        {{#each comments as |comment|}}
+          <div class="blog-comment">
+            p>{{comment.user.userName}} on {{format_date comment.createdAt}}:    {{comment.detail}}</p>
+            <button class="btn btn-sm btn-danger btn-blog" data-id="{{comment.id}}">DELETE</button>
+          </div>
+          <p>-------------------------------------------</p>
+        {{/each}}
+        </div>
     </div>
-    <br></br>
-    <p>-------</p>
-  {{/each}}
+  {{/if}}
 </div>
 
 

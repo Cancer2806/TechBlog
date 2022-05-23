@@ -2,10 +2,10 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const blog_id = document.querySelector('.new-project-form').getAttribute('data-id');
+  const blog_id = document.querySelector('.new-blog-form').getAttribute('data-id');
   // const blog_id = 2;
-  const title = document.querySelector('#project-name').value.trim();
-  const contents = document.querySelector('#project-desc').value.trim();
+  const title = document.querySelector('#blog-name').value.trim();
+  const contents = document.querySelector('#blog-desc').value.trim();
 
   if (contents) {
     const response = await fetch(`/api/blogs`, {
@@ -43,11 +43,8 @@ const delButtonHandler = async (event) => {
 const delCommentHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const comment_id = event.target.getAttribute('data-id');
-    // const blog_id = event.target.getAttribute('data-blog');
-    const blog_id = document.querySelector('.new-project-form').getAttribute('data-id');
+    const blog_id = document.querySelector('.new-blog-form').getAttribute('data-id');
 
-    console.log(`comment id is ${comment_id}`);
-    console.log(`blog id is ${blog_id}`);
     const response = await fetch(`/api/comments/${comment_id}`, {
       method: 'DELETE',
     });

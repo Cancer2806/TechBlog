@@ -107,13 +107,33 @@ nav {
   font-weight: bold;
 }
 
-.dashhead {
-  padding: 5px;
-  margin: 5px;
+.dash-title {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 25%;
   background-color: lightyellow;
   font-size: 250%;
+  color: black;
+}
+
+.dash-head {
+  display: block;
+  margin: 0px;
+  background-color: lightyellow;
+  font-size: 150%;
   color: magenta;
-  border: 2px dotted greenyellow;
+}
+
+.dash-blog {
+  display: block;
+  font-size: 130%;
+  margin-top: 10px;
+  border: 1px dotted black;
+}
+
+.blog-comment {
+  max-width: 90%;
 }
 
 form .form-group {
@@ -123,16 +143,11 @@ form .form-group {
   margin: 0.625rem 0;
 }
 
-form .form-input {
+form .form-input,
+form .form-textarea {
   display: block;
-  width: 75%;
+  width: 90%;
   font-size: 100%;
-}
-.form-textarea {
-  display: block;
-  width: 75%;
-  font-size: 100%;
-  min-height: 200px;
 }
 
 .btn {
@@ -177,3 +192,8 @@ form .form-input {
   padding: 0.3rem 0.9rem;
 }
 
+.btn-blog {
+  display: inline;
+  margin-right: 0;
+  margin-left: 60px;
+}

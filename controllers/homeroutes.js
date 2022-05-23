@@ -8,15 +8,10 @@ router.get('/', async (req, res) => {
   try {
     // Get all Blogs and JOIN with user data
     const blogData = await Blogs.findAll({
-      include: [
-        {
-          model: Users,
-          attributes: ['userName'],
-        },
-      ],
-      order: [
-        ["updated_at", "DESC"],
-      ],
+      include: [{model: Users,
+        attributes: ['userName'],
+      },],
+      order: [["updated_at", "DESC"],],
     });
 
     // Serialise data so the template can read it
@@ -49,6 +44,9 @@ router.get('/blog/:id', async (req, res) => {
             model: Users,
             attributes: ['userName'],
           },
+          order: [
+            ["updated_at", "DESC"],
+          ],
         },
       ],
     });
@@ -72,6 +70,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const userData = await Users.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blogs }],
+      order: [["updated_at", "DESC"],],
     });
 
     // serialise data and pass into the template
@@ -99,9 +98,15 @@ router.get('/update/:id', withAuth, async (req, res) => {
           model: Comments,
           include: {
             model: Users,
-            attributes: ['userName'],
+            attributes: ['userName', 'updated_at'],
           },
+          order: [
+            ["updated_at", "DESC"],
+          ],
         },
+      ],
+      order: [
+        ["updated_at", "DESC"],
       ],
     });
     // serialise data and pass to template designed for updating a specific blog

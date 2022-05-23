@@ -1,21 +1,19 @@
 {{!-- allows logged in user to enter a new blog and view previous blogs --}}
 <div>
-  <h2 class="dashhead">Welcome, {{userName}}!</h2>
+  <h2 class="dash-title">Welcome, {{userName}}!</h2>
 </div>
 
 <div class="row">
   <div class="col-md-6">
-    <h3 class="dashhead">Create a New Blog Post</h3>
-
+    <h3 class="dash-head">Create a New Blog Post</h3>
     <form class="form new-blog-form">
       <div class="form-group">
         <label for="blog-name">Blog Title</label>
         <input class="form-input" type="text" id="blog-name" name="blog-name" />
       </div>
-      
       <div class="form-group">
         <label for="blog-desc">Blog Entry</label>
-        <textarea class="form-input" id="blog-desc" name="blog-desc"></textarea>
+        <textarea class="form-input" id="blog-desc" name="blog-desc" rows="10"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Create</button>
@@ -24,20 +22,12 @@
   </div>
 
   {{#if blogs.length}}
-  <div class="col-md-6 blog-list">
-    <h3 class="dashhead">Current Blogs</h3>
-
-    {{#each blogs as |blog|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/update/{{blog.id}}">{{blog.title}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
-      </div>
+    <div class="col-md-6 blog-list">
+      <h3 class="dash-head">Current Blogs (click to update)</h3>
+      {{#each blogs as |blog|}}
+        <h4 class="dash-blog"><a href="/update/{{blog.id}}">{{blog.title}}</a></h4>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
   {{/if}}
 </div>
 
