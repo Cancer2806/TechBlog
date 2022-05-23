@@ -1,22 +1,21 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{userName}}!</h2>
-  </div>
+{{!-- allows logged in user to enter a new blog and view previous blogs --}}
+<div>
+  <h2 class="dashhead">Welcome, {{userName}}!</h2>
 </div>
 
-<div class="row mt-4">
+<div class="row">
   <div class="col-md-6">
-    <h3>Create a New Blog Post</h3>
+    <h3 class="dashhead">Create a New Blog Post</h3>
 
-    <form class="form new-project-form">
+    <form class="form new-blog-form">
       <div class="form-group">
-        <label for="project-name">Blog Title</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
+        <label for="blog-name">Blog Title</label>
+        <input class="form-input" type="text" id="blog-name" name="blog-name" />
       </div>
       
       <div class="form-group">
-        <label for="project-desc">Blog Entry</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
+        <label for="blog-desc">Blog Entry</label>
+        <textarea class="form-input" id="blog-desc" name="blog-desc"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Create</button>
@@ -25,14 +24,13 @@
   </div>
 
   {{#if blogs.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Blogs</h3>
+  <div class="col-md-6 blog-list">
+    <h3 class="dashhead">Current Blogs</h3>
 
     {{#each blogs as |blog|}}
     <div class="row mb-2">
       <div class="col-md-8">
         <h4><a href="/update/{{blog.id}}">{{blog.title}}</a></h4>
-        <p>{{blog.id}}</p>
       </div>
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>

@@ -1,8 +1,8 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
-  const title = document.querySelector('#project-name').value.trim();
+  const title = document.querySelector('#blog-name').value.trim();
   // const contents = document.querySelector('#project-funding').value.trim();
-  const contents = document.querySelector('#project-desc').value.trim();
+  const contents = document.querySelector('#blog-desc').value.trim();
 
   if (title && contents) {
     const response = await fetch(`/api/blogs`, {
@@ -38,11 +38,10 @@ const delButtonHandler = async (event) => {
 };
 
 
-
 document
-  .querySelector('.new-project-form')
+  .querySelector('.new-blog-form')
   .addEventListener('submit', newFormHandler);
 
 document
-  .querySelector('.project-list')
+  .querySelector('.blog-list')
   .addEventListener('click', delButtonHandler);

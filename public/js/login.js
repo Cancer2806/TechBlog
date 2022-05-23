@@ -1,3 +1,4 @@
+// function for logging in an existing user
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -22,6 +23,7 @@ const loginFormHandler = async (event) => {
   }
 };
 
+// function for adding in a new user
 const signupFormHandler = async (event) => {
   event.preventDefault();
 

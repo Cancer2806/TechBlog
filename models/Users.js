@@ -5,6 +5,7 @@ const sequelize = require('../config/connection');
 
 // create Users Model (table) using Sequelize
 class Users extends Model {
+  // Use bcrypt to hash passwords
   checkPassword(loginPass) {
     return bcrypt.compareSync(loginPass, this.password);
   }
@@ -42,7 +43,7 @@ Users.init(
       },
   },
   {
-    // hooks for hashing of password on creation or updating
+    // define hooks for hashing of password on creation or updating
     hooks: {
       beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);

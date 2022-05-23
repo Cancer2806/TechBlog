@@ -1,7 +1,9 @@
+// Define dependencies
 const router = require('express').Router();
 const { Blogs } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// route used to post a new blog from the logged in User
 router.post('/', withAuth, async (req, res) => {
   try {
     const newBlog = await Blogs.create({
@@ -15,6 +17,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// route used to update a blog of the logged in User (only the user that created a blog can update the blog)
 router.put('/', withAuth, async (req, res) => {
   try {
     const updatedBlog = await Blogs.update({
@@ -35,6 +38,7 @@ router.put('/', withAuth, async (req, res) => {
   }
 });
 
+// route used to delete a blog selected by the logged in User (only the user that created a blog can delete the blog)
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blogs.destroy({

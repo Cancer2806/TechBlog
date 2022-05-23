@@ -1,7 +1,9 @@
+// Define dependencies
 const router = require('express').Router();
 const { Users, Blogs, Comments } = require('../models');
 const withAuth = require('../utils/auth');
 
+// Homepage route for display of all blogs
 router.get('/', async (req, res) => {
   try {
     // Get all Blogs and JOIN with user data
@@ -12,12 +14,15 @@ router.get('/', async (req, res) => {
           attributes: ['userName'],
         },
       ],
+      order: [
+        ["updated_at", "DESC"],
+      ],
     });
 
-    // Serialize data so the template can read it
+    // Serialise data so the template can read it
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
+    // Pass serialised data and session flag into template
     res.render('homepage', {
       blogs,
       logged_in: req.session.logged_in,
@@ -28,9 +33,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-
+// route for display of selected blog
 router.get('/blog/:id', async (req, res) => {
   try {
+    // Use blog id passed through params to find blog and link to creator and any comments (inc user who commented)
     const blogData = await Blogs.findByPk(req.params.id, {
       include: [
         {
@@ -47,6 +53,7 @@ router.get('/blog/:id', async (req, res) => {
       ],
     });
 
+    // serialise data and pass into template
     const blog = blogData.get({ plain: true });
 
     res.render('showblog', {
@@ -58,15 +65,16 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// route to display all blogs created by the logged in user - the users dashboard
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+    // Find the logged in user based on the session ID (logged in user) and link to blogs
     const userData = await Users.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blogs }],
     });
 
+    // serialise data and pass into the template
     const user = userData.get({ plain: true });
 
     res.render('dashboard', {
@@ -78,7 +86,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// route for updating or deleting a selected blog.  Accessible only through a users Dashboard
 router.get('/update/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blogs.findByPk(req.params.id, {
@@ -96,7 +104,7 @@ router.get('/update/:id', withAuth, async (req, res) => {
         },
       ],
     });
-
+    // serialise data and pass to template designed for updating a specific blog
     const blog = blogData.get({ plain: true });
 
     res.render('updateblog', {
@@ -108,13 +116,12 @@ router.get('/update/:id', withAuth, async (req, res) => {
   }
 });
 
+// route for logging in.  If already logged in, user redirected to their dashboard
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/dashboard');
     return;
   }
-
   res.render('login');
 });
 

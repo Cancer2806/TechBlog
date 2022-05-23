@@ -1,5 +1,6 @@
 // Define required modules
 const { faker } = require('@faker-js/faker');
+
 // const { Sequelize } = require('sequelize/types');
 const sequelize = require('../config/connection');
 const { Users, Blogs, Comments } = require('../models');
@@ -19,11 +20,12 @@ async function seedUsers(num) {
   }
 };
 
+// Function to seed Blogs data
 async function seedBlogs(num) {
   for (let i = 0; i < num; i++) {
     const title = faker.lorem.sentence();
     const contents = faker.lorem.paragraphs();
-
+    // randomly assign blogs to users
     const rndUser = await Users.findAll({
       order: sequelize.literal("rand()"), limit: 1
     });
@@ -37,18 +39,17 @@ async function seedBlogs(num) {
   }
 };
 
+// Function to seed Comments
 async function seedComments(num) {
   for (let i = 0; i < num; i++) {
     const detail = faker.lorem.paragraph();
-
+    // randomly assign comments to users and blog posts
     const rndUser = await Users.findAll({
       order: sequelize.literal("rand()"), limit: 1
     });
-
     const rndBlog = await Blogs.findAll({
       order: sequelize.literal("rand()"), limit: 1,
     });
-
     const user_id = rndUser[0].id;
     const blog_id = rndBlog[0].id;
 
@@ -60,15 +61,16 @@ async function seedComments(num) {
   }
 };
 
+// control function for seeding the database
 async function seedDatabase() {
   // sync Sequelize with database
   sequelize.sync({ force: true }).then(async () => {
     // seed Users
     await seedUsers(10);
     // seed Blogs
-    await seedBlogs(10);
+    await seedBlogs(15);
     // seed Comments
-    await seedComments(5);
+    await seedComments(25);
   })
 };
 

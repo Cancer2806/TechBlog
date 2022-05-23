@@ -1,5 +1,6 @@
-// Use sequelize as ORM for managing database
+// Use sequelize as the ORM for managing the database
 const Sequelize = require('sequelize');
+// Use dotenv to substitute environment variables for security purposes
 require('dotenv').config();
 
 let sequelize;
