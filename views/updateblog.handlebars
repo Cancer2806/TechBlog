@@ -28,7 +28,7 @@
         <div id="delcomm">
         {{#each comments as |comment|}}
           <div class="blog-comment">
-            p>{{comment.user.userName}} on {{format_date comment.createdAt}}:    {{comment.detail}}</p>
+            <p>{{comment.user.userName}} on {{format_date comment.createdAt}}:    {{comment.detail}}</p>
             <button class="btn btn-sm btn-danger btn-blog" data-id="{{comment.id}}">DELETE</button>
           </div>
           <p>-------------------------------------------</p>
