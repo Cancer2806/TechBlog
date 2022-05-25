@@ -1,4 +1,4 @@
-// Define dependencies
+// Define dependencies and local modules
 const router = require('express').Router();
 const { Users, Blogs, Comments } = require('../models');
 const withAuth = require('../utils/auth');
@@ -8,7 +8,8 @@ router.get('/', async (req, res) => {
   try {
     // Get all Blogs and JOIN with user data
     const blogData = await Blogs.findAll({
-      include: [{model: Users,
+      include: [{
+        model: Users,
         attributes: ['userName'],
       },],
       order: [["updated_at", "DESC"],],
