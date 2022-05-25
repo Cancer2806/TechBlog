@@ -1,7 +1,7 @@
+// Function to display the logged in users blogs
 const newFormHandler = async (event) => {
   event.preventDefault();
   const title = document.querySelector('#blog-name').value.trim();
-  // const contents = document.querySelector('#project-funding').value.trim();
   const contents = document.querySelector('#blog-desc').value.trim();
 
   if (title && contents) {
@@ -21,6 +21,7 @@ const newFormHandler = async (event) => {
   }
 };
 
+// Button to allow deleting of a blog
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');

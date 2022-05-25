@@ -1,24 +1,19 @@
+{{!-- page displaying a particular blog along with comments --}}
 <div class="text-center">
-  <h2>{{title}}</h2>
-  {{!-- <p>{{{get_emoji}}}</p> --}}
-  <p>{{contents}}</p>
-
-  {{!-- <p>Created by {{user.userName}} on {{format_date created_at}}</p> --}}
-  <p>Created by {{user.userName}} on {{format_date createdAt}}</p>
+  <h2 class="show-title">{{title}}</h2>
+  <h3 class="show-head">Created by {{user.userName}} on {{format_date createdAt}}</h3>
+  <h4 class="show-blog">{{contents}}</h4>
   
+  {{!-Provide the opportunity to comment if logged in --}}
 {{#if logged_in}}
-<div class="row mt-4">
+<div class="row align-center">
   <div class="col-md-6">
-    {{!-- <h3>Add a Comment</h3> --}}
-
-    <form class="form new-project-form">
-      
+    <form class="form new-comment-form">
       <div class="form-group">
-        <label for="project-desc">Add a comment</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
+        <label for="comment-desc">Add a comment</label>
+        <textarea class="form-input" id="comment-desc" name="comment-desc" rows="3"></textarea>
       </div>
       <div class="form-group">
-        {{!-- <button type="submit" class="btn btn-primary"  data-id="{{id}}">Submit</button> --}}
         <button class="btn btn-primary" data-id="{{id}}">Submit</button>
       </div>
     </form>
@@ -26,16 +21,19 @@
 </div>
 {{/if}}
 
-<br>
-<h3>Comments:</h3>
+{{!-- Show comments if there are any --}}
+{{#if comments.length}}
+<h3 class="show-head">Comments:</h3>
 {{#each comments as |comment|}}
-<p>{{comment.detail}}</p>
-<p>Comment by {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
+<h4 class="comment">{{comment.detail}}</h4>
+<p class="comment-by">from {{comment.user.userName}} on {{format_date comment.createdAt}}</p>
 {{/each}}
+{{/if}}
 
+{{!-- if not logged in, show this message --}}
 {{#unless logged_in}}
-<p>--------------------------------------------</p>
-<h4>***  Log in to comment!  ***</h4>
+<p class="show-message">--------------------------------------------</p>
+<h4 class="show-message">***  Log in to comment!  ***</h4>
 {{/unless}}
 </div>
 

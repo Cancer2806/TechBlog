@@ -1,9 +1,8 @@
-
+// Function for updating an existing blog
 const newFormHandler = async (event) => {
   event.preventDefault();
 
   const blog_id = document.querySelector('.new-blog-form').getAttribute('data-id');
-  // const blog_id = 2;
   const title = document.querySelector('#blog-name').value.trim();
   const contents = document.querySelector('#blog-desc').value.trim();
 
@@ -24,6 +23,7 @@ const newFormHandler = async (event) => {
   }
 };
 
+// Function to allow deleting of blog
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
@@ -40,6 +40,7 @@ const delButtonHandler = async (event) => {
   }
 };
 
+// Function to allow deletion of problematic comments
 const delCommentHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const comment_id = event.target.getAttribute('data-id');

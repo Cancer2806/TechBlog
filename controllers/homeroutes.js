@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 // route for display of selected blog
 router.get('/blog/:id', async (req, res) => {
   try {
-    // Use blog id passed through params to find blog and link to creator and any comments (inc user who commented)
+    // Use blog id passed through params to find blog and link to creator and any comments (inc user who posted comment)
     const blogData = await Blogs.findByPk(req.params.id, {
       include: [
         {
@@ -44,9 +44,6 @@ router.get('/blog/:id', async (req, res) => {
             model: Users,
             attributes: ['userName'],
           },
-          order: [
-            ["updated_at", "DESC"],
-          ],
         },
       ],
     });

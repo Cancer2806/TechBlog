@@ -1,15 +1,9 @@
-// const { Comments } = require("../../models");
-
-
+// Function for adding a new comment to a blog
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-    const blog_id = event.target.getAttribute('data-id');
-  // const blog_id = 2;
-  const detail = document.querySelector('#project-desc').value.trim();
-
-  console.log(`details include ${detail}`);
-  console.log(`long shot = ${blog_id}`);
+  const blog_id = event.target.getAttribute('data-id');
+  const detail = document.querySelector('#comment-desc').value.trim();
 
   if (detail) {
     const response = await fetch(`/api/comments`, {
@@ -28,26 +22,6 @@ const newFormHandler = async (event) => {
   }
 };
 
-const delButtonHandler = async (event) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
-
-    const response = await fetch(`/api/blogs/${id}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
-      alert('Failed to delete blog');
-    }
-  }
-};
-
 document
-  .querySelector('.new-project-form')
+  .querySelector('.new-comment-form')
   .addEventListener('click', newFormHandler);
-
-// document
-//   .querySelector('.project-list')
-//   .addEventListener('click', delButtonHandler);
